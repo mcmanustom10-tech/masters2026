@@ -75,13 +75,6 @@ input:focus,select:focus{outline:none;border-color:var(--gold-dim);}
 .pick-block{display:flex;gap:6px;align-items:center;padding:8px 0;border-bottom:1px solid var(--green-border);flex-wrap:wrap;}
 .pick-block strong{min-width:110px;color:var(--gold);font-size:0.83rem;}
 .pick-block select{width:160px;font-size:0.77rem;padding:5px 7px;}
-.setup-wrap{max-width:580px;margin:40px auto;padding:16px;}
-.setup-box{background:var(--surface-2);border:2px dashed var(--gold-dim);border-radius:var(--radius-lg);padding:36px 30px;text-align:center;}
-.setup-box h2{font-family:var(--font-display);color:var(--gold);margin-bottom:14px;font-size:1.5rem;}
-.setup-box p{color:#7aaa7a;font-size:0.88rem;margin-bottom:24px;line-height:1.7;}
-.setup-box input{width:100%;max-width:460px;display:block;margin:0 auto 10px;font-size:0.88rem;}
-.setup-box a{color:var(--gold);}
-code{background:rgba(201,168,76,0.15);color:var(--gold-light);padding:1px 6px;border-radius:3px;font-size:0.85em;}
 .section-divider{height:1px;background:var(--green-border);margin:20px 0;}
 @media(max-width:600px){
   header{padding:20px 14px 16px;}
@@ -101,28 +94,10 @@ code{background:rgba(201,168,76,0.15);color:var(--gold-light);padding:1px 6px;bo
 
 <div class="live-bar">
   <div class="live-dot"></div>
-  <span id="liveStatus">Connecting...</span>
+  <span id="liveStatus">Loading scores...</span>
 </div>
 
-<div id="setupScreen" style="display:none;" class="setup-wrap">
-  <div class="setup-box">
-    <h2>⚙️ First-Time Setup</h2>
-    <p>
-      Scores are stored on <a href="https://jsonbin.io" target="_blank" rel="noopener">JSONBin.io</a> (free).<br><br>
-      <strong>Step 1:</strong> Go to jsonbin.io → Sign Up → Create a Bin<br>
-      <strong>Step 2:</strong> Paste <code>{"data":"masters2026"}</code>, set to <strong>Public</strong>, Save<br>
-      <strong>Step 3:</strong> Copy your <strong>Bin ID</strong> (from URL) and <strong>Master Key</strong> (Account → API Keys)<br>
-      <strong>Step 4:</strong> Paste below and choose an admin password
-    </p>
-    <input type="text" id="setupBinId" placeholder="Bin ID (e.g. 6613abc12a3cd...)">
-    <input type="password" id="setupApiKey" placeholder="Master Key (starts with $2a$...)">
-    <input type="text" id="setupAdminPass" placeholder="Your admin password (only you need this)">
-    <button class="btn" onclick="saveSetup()">💾 Save &amp; Launch</button>
-    <div class="status" id="setupMsg"></div>
-  </div>
-</div>
-
-<div id="mainApp" style="display:none;">
+<div id="mainApp">
 <div class="container">
 
   <div class="tabs">
@@ -155,7 +130,7 @@ code{background:rgba(201,168,76,0.15);color:var(--gold-light);padding:1px 6px;bo
         <th style="text-align:right;width:80px">Score</th>
       </tr></thead>
       <tbody id="lbTbody">
-        <tr><td colspan="5" style="text-align:center;padding:40px;color:#4a6a4a;">No leaderboard data yet. Use Admin tab to update.</td></tr>
+        <tr><td colspan="5" style="text-align:center;padding:40px;color:#4a6a4a;">No leaderboard data yet.</td></tr>
       </tbody>
     </table>
   </div>
@@ -163,7 +138,6 @@ code{background:rgba(201,168,76,0.15);color:var(--gold-light);padding:1px 6px;bo
   <div class="tab-content" id="tab-admin">
     <div id="adminLock" class="panel">
       <h3>🔒 Admin Login</h3>
-      <p class="hint">Only you need this — your group only sees Standings and Leaderboard.</p>
       <div class="field-row">
         <label>Password</label>
         <input type="password" id="adminPassInput" placeholder="Enter your admin password" onkeydown="if(event.key==='Enter')unlockAdmin()">
@@ -175,7 +149,7 @@ code{background:rgba(201,168,76,0.15);color:var(--gold-light);padding:1px 6px;bo
       <div class="panel">
         <h3>📋 Update Tournament Leaderboard</h3>
         <p class="hint">
-          Enter each golfer's current position. For tied players, enter the <em>same number</em> — they share the same multiplier automatically.<br>
+          Enter each golfer's current position. Tied players get the same number — they share the same multiplier automatically.<br>
           <strong>Multipliers:</strong> 1st=×10 · 2nd=×9 · 3rd=×8 · 4th=×7 · 5th=×6 · 6th=×5 · 7th=×4 · 8th=×3 · 9th=×2 · 10th=×1 · Beyond 10th=×0
         </p>
         <div id="lbInputRows"></div>
@@ -198,6 +172,14 @@ code{background:rgba(201,168,76,0.15);color:var(--gold-light);padding:1px 6px;bo
 </div>
 
 <script>
+
+// ========================================================
+// ========================================================
+const BIN_ID     = "69d55bfdaaba882197d3e2c7";       
+const MASTER_KEY = "$2a$10$xermnKntxXmkpYQ3Mv20HOeXNIfEbv0w8JnYwwxH7B9WQWX6dRcgS";   // e.g. "$2a$10$abc123..."
+const ADMIN_PASS = "adminmasters2026";    // 
+// ========================================================
+
 const ODDS = {"Scottie Scheffler":5,"Jon Rahm":9.5,"Bryson DeChambeau":10,"Rory McIlroy":12,"Ludvig Åberg":15,"Xander Schauffele":16,"Matt Fitzpatrick":20,"Cameron Young":20,"Tommy Fleetwood":22,"Collin Morikawa":30,"Justin Rose":30,"Robert MacIntyre":33,"Patrick Reed":35,"Hideki Matsuyama":40,"Min Woo Lee":40,"Chris Gotterup":45,"Jordan Spieth":45,"Brooks Koepka":45,"Si Woo Kim":50,"Shane Lowry":55,"Russell Henley":55,"Viktor Hovland":55,"Akshay Bhatia":60,"Patrick Cantlay":65,"Jacob Bridgeman":65,"Nicolai Højgaard":65,"Jake Knapp":70,"Adam Scott":70,"Sepp Straka":70,"Tyrrell Hatton":70,"J.J. Spaun":70,"Justin Thomas":70,"Corey Conners":80,"Marco Penge":80,"Sungjae Im":100,"Sam Burns":100,"Harris English":100,"Cameron Smith":100,"Jason Day":100,"Maverick McNealy":100,"Gary Woodland":100,"Brian Harman":125,"Max Homa":125,"Daniel Berger":150,"Rasmus Højgaard":150,"Ben Griffin":150,"Kurt Kitayama":150,"Aaron Rai":150,"Ryan Fox":175,"Casey Jarvis":175,"Keegan Bradley":175,"Dustin Johnson":175,"Alex Noren":175,"Harry Hall":175,"Ryan Gerard":175,"Sam Stevens":225,"Nick Taylor":225,"Michael Kim":225,"Wyndham Clark":225,"Max Greyserman":250,"Sami Valimaki":250,"Sergio Garcia":250,"Haotong Li":250,"Nicolas Echavarria":250,"Carlos Ortiz":250,"Aldrich Potgieter":250,"Rasmus Neergaard-Petersen":350,"Andrew Novak":350,"Tom McKibbin":350,"Michael Brennan":500,"Kristoffer Reitan":500,"John Keefer":500,"Matt McCarty":500,"Davis Riley":750,"Bubba Watson":750,"Charl Schwartzel":750,"Zach Johnson":750,"Angel Cabrera":1000,"Mason Howell":1000,"Fifa Laopakdee":1000,"Ethan Fang":1000,"Brian Campbell":1000,"Vijay Singh":1000,"Jose Maria Olazabal":1000,"Brandon Holtz":1000,"Naoyuki Kataoka":1000,"Danny Willett":1000,"Jackson Herrington":1000,"Fred Couples":1000,"Mateo Pulcini":1000,"Mike Weir":1000};
 const GOLFER_NAMES = Object.keys(ODDS).sort((a,b)=>a.localeCompare(b));
 const POS_MULT = {1:10,2:9,3:8,4:7,5:6,6:5,7:4,8:3,9:2,10:1};
@@ -225,20 +207,16 @@ const DEFAULT_PARTICIPANTS = [
   {name:"Tom",picks:["Xander Schauffele","Robert MacIntyre","Patrick Reed","Hideki Matsuyama","Corey Conners"]}
 ];
 
-let CFG={};
-function loadCfg(){try{CFG=JSON.parse(localStorage.getItem("m26cfg")||"{}");}catch(e){}}
-function saveCfg(){localStorage.setItem("m26cfg",JSON.stringify(CFG));}
-
-let DATA={leaderboard:[],participants:DEFAULT_PARTICIPANTS,lastUpdated:null};
+let DATA = {leaderboard:[],participants:DEFAULT_PARTICIPANTS,lastUpdated:null};
 
 async function fetchData(){
   try{
-    const r=await fetch("https://api.jsonbin.io/v3/b/"+CFG.binId+"/latest",{headers:{"X-Master-Key":CFG.apiKey}});
+    const r=await fetch("https://api.jsonbin.io/v3/b/"+BIN_ID+"/latest",{headers:{"X-Master-Key":MASTER_KEY}});
     if(!r.ok)throw new Error();
     const j=await r.json();
     if(j.record&&j.record.participants&&j.record.participants.length>0){DATA=j.record;}
     else if(j.record&&j.record.leaderboard!==undefined){DATA.leaderboard=j.record.leaderboard;DATA.lastUpdated=j.record.lastUpdated;}
-    setStatus("Live · last updated "+(DATA.lastUpdated||"—"));
+    setStatus("Last updated: "+(DATA.lastUpdated||"not yet updated"));
     renderAll();
   }catch(e){setStatus("⚠️ Cannot reach cloud — showing local data");renderAll();}
 }
@@ -258,17 +236,17 @@ async function pushData(){
   DATA.leaderboard=lbRows;DATA.participants=picks;
   DATA.lastUpdated=new Date().toLocaleString("en-GB",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"});
   try{
-    const r=await fetch("https://api.jsonbin.io/v3/b/"+CFG.binId,{method:"PUT",headers:{"Content-Type":"application/json","X-Master-Key":CFG.apiKey},body:JSON.stringify(DATA)});
+    const r=await fetch("https://api.jsonbin.io/v3/b/"+BIN_ID,{method:"PUT",headers:{"Content-Type":"application/json","X-Master-Key":MASTER_KEY},body:JSON.stringify(DATA)});
     if(!r.ok)throw new Error();
     document.getElementById("pushMsg").className="status ok";
-    document.getElementById("pushMsg").textContent="✅ Published at "+DATA.lastUpdated+" — everyone's phone updates within 60s";
+    document.getElementById("pushMsg").textContent="✅ Published at "+DATA.lastUpdated+" — everyone sees this within 60s";
     document.getElementById("picksMsg").className="status ok";
     document.getElementById("picksMsg").textContent="✅ Picks saved.";
-    setStatus("Live · last updated "+DATA.lastUpdated);
+    setStatus("Last updated: "+DATA.lastUpdated);
     renderAll();
   }catch(e){
     document.getElementById("pushMsg").className="status err";
-    document.getElementById("pushMsg").textContent="❌ Push failed — check your Bin ID and Master Key.";
+    document.getElementById("pushMsg").textContent="❌ Push failed — check your Bin ID and Master Key in the code.";
   }
 }
 
@@ -307,7 +285,7 @@ function renderStandings(){
 
 function renderLeaderboard(){
   const tbody=document.getElementById("lbTbody");
-  if(!DATA.leaderboard.length){tbody.innerHTML=`<tr><td colspan="5" style="text-align:center;padding:40px;color:#4a6a4a;">No leaderboard data yet. Go to Admin tab to enter today's top 10.</td></tr>`;return;}
+  if(!DATA.leaderboard.length){tbody.innerHTML=`<tr><td colspan="5" style="text-align:center;padding:40px;color:#4a6a4a;">No leaderboard data yet. Go to Admin tab to enter positions.</td></tr>`;return;}
   tbody.innerHTML="";
   const grouped={};
   DATA.leaderboard.forEach(e=>{if(!grouped[e.position])grouped[e.position]=[];grouped[e.position].push(e.name);});
@@ -359,37 +337,19 @@ function showTab(id,btn){
 }
 
 function unlockAdmin(){
-  if(document.getElementById("adminPassInput").value===CFG.adminPass){
+  if(document.getElementById("adminPassInput").value===ADMIN_PASS){
     document.getElementById("adminLock").style.display="none";
     document.getElementById("adminContent").style.display="block";
     renderAdminLb();renderAdminPicks();
   }else{document.getElementById("lockMsg").textContent="❌ Wrong password";}
 }
 
-function saveSetup(){
-  const binId=document.getElementById("setupBinId").value.trim();
-  const apiKey=document.getElementById("setupApiKey").value.trim();
-  const adminPass=document.getElementById("setupAdminPass").value.trim();
-  if(!binId||!apiKey||!adminPass){document.getElementById("setupMsg").textContent="⚠️ Please fill in all three fields.";return;}
-  CFG={binId,apiKey,adminPass};saveCfg();init();
-}
-
 function setStatus(msg){document.getElementById("liveStatus").textContent=msg;}
 
-async function init(){
-  loadCfg();
-  if(!CFG.binId||!CFG.apiKey){
-    document.getElementById("setupScreen").style.display="block";
-    document.getElementById("mainApp").style.display="none";return;
-  }
-  document.getElementById("setupScreen").style.display="none";
-  document.getElementById("mainApp").style.display="block";
-  setStatus("Fetching latest scores...");
-  await fetchData();
-  setInterval(fetchData,60000);
-}
+// Start — fetch latest data immediately
+fetchData();
+setInterval(fetchData,60000);
 
-init();
 </script>
 </body>
 </html>
