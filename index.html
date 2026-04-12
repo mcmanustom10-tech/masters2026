@@ -9,15 +9,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Work+Sans:wght@300..700&display=swap" rel="stylesheet">
 <style>
 :root {
---gold:#c9a84c;--gold-light:#e8c96a;--gold-dim:#8a6e2a;
---green-dark:#0a2a0a;--green-mid:#1a3a1a;--green-bright:#1e5c1e;
---green-border:#2a5a2a;--green-muted:#3a7a3a;
---cream:#f5f0e8;--cream-dim:#c8c0b0;
---surface:#122412;--surface-2:#0d1f0d;
---font-display:'Playfair Display',Georgia,serif;
---font-body:'Work Sans','Helvetica Neue',sans-serif;
---radius-sm:4px;--radius-md:8px;--radius-lg:12px;
---transition:180ms cubic-bezier(0.16,1,0.3,1);
+  --gold:#c9a84c;--gold-light:#e8c96a;--gold-dim:#8a6e2a;
+  --green-dark:#0a2a0a;--green-mid:#1a3a1a;--green-bright:#1e5c1e;
+  --green-border:#2a5a2a;--green-muted:#3a7a3a;
+  --cream:#f5f0e8;--cream-dim:#c8c0b0;
+  --surface:#122412;--surface-2:#0d1f0d;
+  --font-display:'Playfair Display',Georgia,serif;
+  --font-body:'Work Sans','Helvetica Neue',sans-serif;
+  --radius-sm:4px;--radius-md:8px;--radius-lg:12px;
+  --transition:180ms cubic-bezier(0.16,1,0.3,1);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth;}
@@ -26,7 +26,6 @@ button,input,select{font:inherit;color:inherit;}
 header{background:linear-gradient(160deg,#061206 0%,#0f2e0f 50%,#071a07 100%);border-bottom:3px solid var(--gold);padding:28px 20px 22px;text-align:center;position:relative;overflow:hidden;}
 header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(201,168,76,0.08) 0%,transparent 70%);pointer-events:none;}
 header h1{font-family:var(--font-display);font-size:clamp(1.6rem,4vw,2.6rem);color:var(--gold);letter-spacing:1px;line-height:1.15;}
-header p{color:#7aaa7a;font-size:0.88rem;margin-top:6px;font-weight:300;}
 .live-bar{background:#061206;border-bottom:1px solid var(--green-border);padding:9px 16px;display:flex;justify-content:center;align-items:center;gap:8px;font-size:0.8rem;color:#6a9a6a;}
 .live-dot{width:7px;height:7px;background:#4caf50;border-radius:50%;flex-shrink:0;animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.4;transform:scale(0.8);}}
@@ -40,7 +39,6 @@ table{width:100%;border-collapse:collapse;}
 th{background:var(--surface-2);color:var(--gold);padding:11px 10px;text-align:left;font-size:0.75rem;letter-spacing:1.2px;text-transform:uppercase;border-bottom:2px solid var(--gold-dim);font-weight:600;}
 td{padding:12px 10px;border-bottom:1px solid var(--green-border);font-size:0.875rem;vertical-align:middle;}
 tr:nth-child(even) td{background:rgba(255,255,255,0.02);}
-tbody tr{transition:background var(--transition);}
 tbody tr:hover td{background:rgba(201,168,76,0.07);}
 .rank{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;font-weight:700;font-size:0.85rem;flex-shrink:0;}
 .rank-1{background:#FFD700;color:#1a1000;}
@@ -52,304 +50,168 @@ tbody tr:hover td{background:rgba(201,168,76,0.07);}
 .tag.scoring{background:#2a4a05;border-color:var(--gold-dim);color:var(--gold-light);}
 .tag .mult{font-size:0.68rem;color:var(--gold);font-weight:700;margin-left:1px;}
 .tag.scoring .mult{color:#fff;}
-.no-picks{color:#4a6a4a;font-size:0.8rem;font-style:italic;}
 .score{font-size:1.25rem;font-weight:700;color:var(--gold);font-family:var(--font-display);}
 .score-zero{color:#4a6a4a;}
 .pos{font-weight:700;color:var(--gold);}
 .mbadge{background:var(--gold);color:var(--green-dark);border-radius:3px;padding:2px 8px;font-size:0.75rem;font-weight:700;}
 .no-mult{color:#4a6a4a;font-size:0.78rem;}
-.panel{background:var(--surface-2);border:1px solid var(--green-border);border-radius:var(--radius-md);padding:22px;margin-bottom:20px;}
-.panel h3{font-family:var(--font-display);color:var(--gold);margin-bottom:10px;font-size:1.05rem;}
-.hint{color:#6a9a6a;font-size:0.8rem;margin-bottom:16px;line-height:1.6;}
-.field-row{display:flex;gap:8px;align-items:center;margin-bottom:7px;flex-wrap:wrap;}
-.field-row label{color:#6a9a6a;font-size:0.8rem;min-width:55px;}
-input[type=number],input[type=text],input[type=password],select{background:var(--green-mid);border:1px solid var(--green-border);color:var(--cream);padding:7px 10px;border-radius:var(--radius-sm);font-size:0.85rem;}
-input:focus,select:focus{outline:none;border-color:var(--gold-dim);}
-.btn{display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:var(--green-dark);border:none;padding:10px 22px;border-radius:var(--radius-sm);cursor:pointer;font-size:0.9rem;font-weight:600;transition:background var(--transition);margin-top:10px;}
-.btn:hover{background:var(--gold-light);}
-.btn.sm{padding:5px 12px;font-size:0.78rem;margin-top:0;}
-.btn.danger{background:#5a1a1a;color:#f5c0c0;}
-.status{margin-top:10px;font-size:0.83rem;min-height:18px;}
-.status.ok{color:#5cb85c;}
-.status.err{color:#e55;}
-.pick-block{display:flex;gap:6px;align-items:center;padding:8px 0;border-bottom:1px solid var(--green-border);flex-wrap:wrap;}
-.pick-block strong{min-width:110px;color:var(--gold);font-size:0.83rem;}
-.pick-block select{width:160px;font-size:0.77rem;padding:5px 7px;}
-.section-divider{height:1px;background:var(--green-border);margin:20px 0;}
 @media(max-width:600px){
-header{padding:20px 14px 16px;}
-th,td{padding:9px 7px;font-size:0.78rem;}
-.score{font-size:1rem;}
-.tag{font-size:0.7rem;padding:2px 5px;}
-.pick-block select{width:130px;}
-.pick-block strong{min-width:80px;}
+  header{padding:20px 14px 16px;}
+  th,td{padding:9px 7px;font-size:0.78rem;}
+  .score{font-size:1rem;}
+  .tag{font-size:0.7rem;padding:2px 5px;}
 }
 </style>
 </head>
 <body>
 
 <header>
-<h1>⛳ Masters 2026 Sweepstakes</h1>
+  <h1>⛳ Masters 2026 Sweepstakes</h1>
 </header>
 
 <div class="live-bar">
-<div class="live-dot"></div>
-<span id="liveStatus">Loading scores...</span>
+  <div class="live-dot"></div>
+  <span id="liveStatus">Loading scores...</span>
 </div>
 
-<div id="mainApp">
 <div class="container">
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('standings',this)">🏆 Standings</button>
+    <button class="tab-btn" onclick="showTab('leaderboard',this)">📋 Leaderboard</button>
+  </div>
 
-<div class="tabs">
-<button class="tab-btn active" onclick="showTab('standings',this)">🏆 Standings</button>
-<button class="tab-btn" onclick="showTab('leaderboard',this)">📋 Leaderboard</button>
-<button class="tab-btn" onclick="showTab('admin',this)">⚙️ Admin</button>
-</div>
+  <div class="tab-content active" id="tab-standings">
+    <table>
+      <thead><tr>
+        <th style="width:52px">Rank</th>
+        <th>Participant</th>
+        <th>Picks</th>
+        <th style="text-align:right;width:80px">Score</th>
+      </tr></thead>
+      <tbody id="standingsTbody">
+        <tr><td colspan="4" style="text-align:center;padding:40px;color:#4a6a4a;">Loading...</td></tr>
+      </tbody>
+    </table>
+  </div>
 
-<div class="tab-content active" id="tab-standings">
-<table>
-<thead><tr>
-<th style="width:52px">Rank</th>
-<th>Participant</th>
-<th>Picks</th>
-<th style="text-align:right;width:80px">Score</th>
-</tr></thead>
-<tbody id="standingsTbody">
-<tr><td colspan="4" style="text-align:center;padding:40px;color:#4a6a4a;">Loading...</td></tr>
-</tbody>
-</table>
-</div>
-
-<div class="tab-content" id="tab-leaderboard">
-<table>
-<thead><tr>
-<th style="width:60px">Pos</th>
-<th>Golfer</th>
-<th style="text-align:right;width:70px">Odds</th>
-<th style="width:120px">Multiplier</th>
-<th style="text-align:right;width:80px">Score</th>
-</tr></thead>
-<tbody id="lbTbody">
-<tr><td colspan="5" style="text-align:center;padding:40px;color:#4a6a4a;">No leaderboard data yet.</td></tr>
-</tbody>
-</table>
-</div>
-
-<div class="tab-content" id="tab-admin">
-<div id="adminLock" class="panel">
-<h3>🔒 Admin Login</h3>
-<div class="field-row">
-<label>Password</label>
-<input type="password" id="adminPassInput" placeholder="Enter your admin password" onkeydown="if(event.key==='Enter')unlockAdmin()">
-<button class="btn sm" onclick="unlockAdmin()">Unlock</button>
-</div>
-<div class="status err" id="lockMsg"></div>
-</div>
-<div id="adminContent" style="display:none;">
-<div class="panel">
-<h3>📋 Update Tournament Leaderboard</h3>
-<p class="hint">
-Enter each golfer's current position. Tied players get the same number — they share the same multiplier automatically.<br>
-<strong>Multipliers:</strong> 1st=×10 · 2nd=×9 · 3rd=×8 · 4th=×7 · 5th=×6 · 6th=×5 · 7th=×4 · 8th=×3 · 9th=×2 · 10th=×1 · Beyond 10th=×0
-</p>
-<div id="lbInputRows"></div>
-<button class="btn sm" onclick="addLbRow()" style="margin-top:10px;">+ Add Row</button><br>
-<button class="btn" onclick="pushData()">☁️ Save &amp; Publish to All Viewers</button>
-<div class="status" id="pushMsg"></div>
-</div>
-<div class="panel">
-<h3>👥 Participant Picks</h3>
-<p class="hint">All picks pre-loaded from your sheet. Edit if anything changes then hit Save &amp; Publish.</p>
-<div id="picksRows"></div>
-<div class="section-divider"></div>
-<button class="btn" onclick="pushData()">☁️ Save &amp; Publish to All Viewers</button>
-<div class="status" id="picksMsg"></div>
-</div>
-</div>
-</div>
-
-</div>
+  <div class="tab-content" id="tab-leaderboard">
+    <table>
+      <thead><tr>
+        <th style="width:60px">Pos</th>
+        <th>Golfer</th>
+        <th style="text-align:right;width:70px">Odds</th>
+        <th style="width:120px">Multiplier</th>
+        <th style="text-align:right;width:80px">Score</th>
+      </tr></thead>
+      <tbody id="lbTbody">
+        <tr><td colspan="5" style="text-align:center;padding:40px;color:#4a6a4a;">No leaderboard data yet.</td></tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 <script>
-
-// ========================================================
-// ========================================================
-const BIN_ID = "69d55bfdaaba882197d3e2c7";
-const MASTER_KEY = "$2a$10$xermnKntxXmkpYQ3Mv20HOeXNIfEbv0w8JnYwwxH7B9WQWX6dRcgS"; // e.g. "$2a$10$abc123..."
-const ADMIN_PASS = "adminmasters2026"; //
-// ========================================================
+const BIN_ID = "69dbe2acaaba882197efdb9e";
 
 const ODDS = {"Scottie Scheffler":5,"Jon Rahm":9.5,"Bryson DeChambeau":10,"Rory McIlroy":12,"Ludvig Åberg":15,"Xander Schauffele":16,"Matt Fitzpatrick":20,"Cameron Young":20,"Tommy Fleetwood":22,"Collin Morikawa":30,"Justin Rose":30,"Robert MacIntyre":33,"Patrick Reed":35,"Hideki Matsuyama":40,"Min Woo Lee":40,"Chris Gotterup":45,"Jordan Spieth":45,"Brooks Koepka":45,"Si Woo Kim":50,"Shane Lowry":55,"Russell Henley":55,"Viktor Hovland":55,"Akshay Bhatia":60,"Patrick Cantlay":65,"Jacob Bridgeman":65,"Nicolai Højgaard":65,"Jake Knapp":70,"Adam Scott":70,"Sepp Straka":70,"Tyrrell Hatton":70,"J.J. Spaun":70,"Justin Thomas":70,"Corey Conners":80,"Marco Penge":80,"Sungjae Im":100,"Sam Burns":100,"Harris English":100,"Cameron Smith":100,"Jason Day":100,"Maverick McNealy":100,"Gary Woodland":100,"Brian Harman":125,"Max Homa":125,"Daniel Berger":150,"Rasmus Højgaard":150,"Ben Griffin":150,"Kurt Kitayama":150,"Aaron Rai":150,"Ryan Fox":175,"Casey Jarvis":175,"Keegan Bradley":175,"Dustin Johnson":175,"Alex Noren":175,"Harry Hall":175,"Ryan Gerard":175,"Sam Stevens":225,"Nick Taylor":225,"Michael Kim":225,"Wyndham Clark":225,"Max Greyserman":250,"Sami Valimaki":250,"Sergio Garcia":250,"Haotong Li":250,"Nicolas Echavarria":250,"Carlos Ortiz":250,"Aldrich Potgieter":250,"Rasmus Neergaard-Petersen":350,"Andrew Novak":350,"Tom McKibbin":350,"Michael Brennan":500,"Kristoffer Reitan":500,"John Keefer":500,"Matt McCarty":500,"Davis Riley":750,"Bubba Watson":750,"Charl Schwartzel":750,"Zach Johnson":750,"Angel Cabrera":1000,"Mason Howell":1000,"Fifa Laopakdee":1000,"Ethan Fang":1000,"Brian Campbell":1000,"Vijay Singh":1000,"Jose Maria Olazabal":1000,"Brandon Holtz":1000,"Naoyuki Kataoka":1000,"Danny Willett":1000,"Jackson Herrington":1000,"Fred Couples":1000,"Mateo Pulcini":1000,"Mike Weir":1000};
-const GOLFER_NAMES = Object.keys(ODDS).sort((a,b)=>a.localeCompare(b));
 const POS_MULT = {1:10,2:9,3:8,4:7,5:6,6:5,7:4,8:3,9:2,10:1};
 
-const DEFAULT_PARTICIPANTS = [
-{name:"Adrian",picks:["Patrick Reed","Jake Knapp","Harris English","Jason Day","Max Homa"]},
-{name:"Alex Byrne",picks:["Scottie Scheffler","Jon Rahm","Ludvig Åberg","Hideki Matsuyama","Corey Conners"]},
-{name:"Conor Cassidy",picks:["Scottie Scheffler","Collin Morikawa","Hideki Matsuyama","Corey Conners","Sungjae Im"]},
-{name:"Conor Treacy",picks:["Ludvig Åberg","Matt Fitzpatrick","Tommy Fleetwood","Patrick Reed","Nicolai Højgaard"]},
-{name:"Cormac",picks:["Matt Fitzpatrick","Cameron Young","Si Woo Kim","Jacob Bridgeman","Corey Conners"]},
-{name:"Daniel Woods",picks:["Jon Rahm","Xander Schauffele","Matt Fitzpatrick","Tommy Fleetwood","Cameron Smith"]},
-{name:"Donal McMahon",picks:["Jon Rahm","Ludvig Åberg","Xander Schauffele","Patrick Reed","Jordan Spieth"]},
-{name:"Eanna",picks:["Bryson DeChambeau","Xander Schauffele","Matt Fitzpatrick","Akshay Bhatia","Gary Woodland"]},
-{name:"Harry",picks:["Xander Schauffele","Jacob Bridgeman","Nicolai Højgaard","Sungjae Im","Ryan Fox"]},
-{name:"JJ Walshe",picks:["Scottie Scheffler","Jon Rahm","Ludvig Åberg","Si Woo Kim","Russell Henley"]},
-{name:"Jody",picks:["Ludvig Åberg","Cameron Young","Justin Rose","Nicolai Højgaard","Corey Conners"]},
-{name:"Macey",picks:["Ludvig Åberg","Cameron Young","Justin Rose","Akshay Bhatia","J.J. Spaun"]},
-{name:"Matt McKenna",picks:["Ludvig Åberg","Matt Fitzpatrick","Patrick Reed","Nicolai Højgaard","Adam Scott"]},
-{name:"Maxwell",picks:["Xander Schauffele","Tommy Fleetwood","Justin Rose","Hideki Matsuyama","Sungjae Im"]},
-{name:"Patrick Carroll",picks:["Justin Rose","Patrick Reed","Akshay Bhatia","Nicolai Højgaard","Jake Knapp"]},
-{name:"Pete",picks:["Xander Schauffele","Matt Fitzpatrick","Cameron Young","Collin Morikawa","Sepp Straka"]},
-{name:"Rob",picks:["Rory McIlroy","Ludvig Åberg","Xander Schauffele","Matt Fitzpatrick","Justin Rose"]},
-{name:"Scott",picks:["Ludvig Åberg","Matt Fitzpatrick","Collin Morikawa","Robert MacIntyre","Jordan Spieth"]},
-{name:"Tim",picks:["Xander Schauffele","Tommy Fleetwood","Robert MacIntyre","Hideki Matsuyama","Corey Conners"]},
-{name:"Tom",picks:["Xander Schauffele","Robert MacIntyre","Patrick Reed","Hideki Matsuyama","Corey Conners"]}
-];
-
-let DATA = {leaderboard:[],participants:DEFAULT_PARTICIPANTS,lastUpdated:null};
-
 async function fetchData(){
-try{
-const r=await fetch("https://api.jsonbin.io/v3/b/"+BIN_ID+"/latest",{headers:{"X-Master-Key":MASTER_KEY}});
-if(!r.ok)throw new Error();
-const j=await r.json();
-if(j.record&&j.record.participants&&j.record.participants.length>0){DATA=j.record;}
-else if(j.record&&j.record.leaderboard!==undefined){DATA.leaderboard=j.record.leaderboard;DATA.lastUpdated=j.record.lastUpdated;}
-setStatus("Last updated: "+(DATA.lastUpdated||"not yet updated"));
-renderAll();
-}catch(e){setStatus("⚠️ Cannot reach cloud — showing local data");renderAll();}
+  try{
+    const r = await fetch("https://api.jsonbin.io/v3/b/" + BIN_ID + "/latest");
+    if(!r.ok) throw new Error();
+    const j = await r.json();
+    const data = j.record || {};
+    renderAll(data);
+    document.getElementById("liveStatus").textContent = "Last updated: " + (data.lastUpdated || "not yet updated");
+  }catch(e){
+    document.getElementById("liveStatus").textContent = "Unable to load latest scores";
+  }
 }
 
-async function pushData(){
-const lbRows=[];
-document.querySelectorAll(".lb-entry").forEach(row=>{
-const pos=parseInt(row.querySelector(".pos-in").value);
-const name=row.querySelector(".name-in").value;
-if(name&&pos>=1)lbRows.push({name,position:pos});
-});
-lbRows.sort((a,b)=>a.position-b.position);
-const picks=[];
-document.querySelectorAll(".pick-block[data-name]").forEach(row=>{
-picks.push({name:row.dataset.name,picks:Array.from(row.querySelectorAll("select")).map(s=>s.value)});
-});
-DATA.leaderboard=lbRows;DATA.participants=picks;
-DATA.lastUpdated=new Date().toLocaleString("en-GB",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"});
-try{
-const r=await fetch("https://api.jsonbin.io/v3/b/"+BIN_ID,{method:"PUT",headers:{"Content-Type":"application/json","X-Master-Key":MASTER_KEY},body:JSON.stringify(DATA)});
-if(!r.ok)throw new Error();
-document.getElementById("pushMsg").className="status ok";
-document.getElementById("pushMsg").textContent="✅ Published at "+DATA.lastUpdated+" — everyone sees this within 60s";
-document.getElementById("picksMsg").className="status ok";
-document.getElementById("picksMsg").textContent="✅ Picks saved.";
-setStatus("Last updated: "+DATA.lastUpdated);
-renderAll();
-}catch(e){
-document.getElementById("pushMsg").className="status err";
-document.getElementById("pushMsg").textContent="❌ Push failed — check your Bin ID and Master Key in the code.";
-}
+function buildMultMap(leaderboard){
+  const map={};
+  (leaderboard||[]).forEach(e=>{
+    const m=POS_MULT[e.position]||0;
+    if(m>0) map[e.name]={mult:m,position:e.position};
+  });
+  return map;
 }
 
-function buildMultMap(){
-const map={};
-DATA.leaderboard.forEach(e=>{const m=POS_MULT[e.position]||0;if(m>0)map[e.name]={mult:m,position:e.position};});
-return map;
+function calcScore(participant, mm){
+  let total=0;
+  const details=[];
+  (participant.picks||[]).forEach(pick=>{
+    const odds=ODDS[pick]||0;
+    const mult=(mm[pick]&&mm[pick].mult)||0;
+    total += odds*mult;
+    details.push({name:pick,mult});
+  });
+  return {total,details};
 }
 
-function calcScore(participant,mm){
-let total=0;const details=[];
-for(const pick of participant.picks){
-if(!pick)continue;
-const odds=ODDS[pick];const info=mm[pick];
-const mult=info?info.mult:0;const score=(odds||0)*mult;
-total+=score;details.push({name:pick,odds:odds||"?",mult,score});
-}
-return{total,details};
-}
-
-function renderStandings(){
-const mm=buildMultMap();
-const rows=DATA.participants.map(p=>({...calcScore(p,mm),pname:p.name}));
-rows.sort((a,b)=>b.total-a.total);
-let dr=1,prev=null,cnt=0;
-const tbody=document.getElementById("standingsTbody");tbody.innerHTML="";
-rows.forEach(row=>{
-cnt++;if(row.total!==prev)dr=cnt;prev=row.total;
-const rc=dr===1?"rank-1":dr===2?"rank-2":dr===3?"rank-3":"rank-x";
-const tags=row.details.filter(d=>d.name).map(d=>`<span class="tag ${d.mult>0?"scoring":""}">${d.name}${d.mult>0?`<span class="mult">×${d.mult}</span>`:""}</span>`).join("")||`<span class="no-picks">No picks</span>`;
-const tr=document.createElement("tr");
-tr.innerHTML=`<td><span class="rank ${rc}">${dr}</span></td><td><strong>${row.pname}</strong></td><td><div class="tags">${tags}</div></td><td style="text-align:right"><span class="${row.total>0?"score":"score score-zero"}">${row.total%1===0?row.total.toFixed(0):row.total.toFixed(1)}</span></td>`;
-tbody.appendChild(tr);
-});
+function renderStandings(data){
+  const mm = buildMultMap(data.leaderboard||[]);
+  const rows = (data.participants||[]).map(p => ({...calcScore(p,mm), pname:p.name}));
+  rows.sort((a,b)=>b.total-a.total);
+  let dr=1, prev=null, cnt=0;
+  const tbody=document.getElementById("standingsTbody");
+  tbody.innerHTML="";
+  rows.forEach(row=>{
+    cnt++;
+    if(row.total!==prev) dr=cnt;
+    prev=row.total;
+    const rc=dr===1?"rank-1":dr===2?"rank-2":dr===3?"rank-3":"rank-x";
+    const tags=row.details.map(d=>`<span class="tag ${d.mult>0?"scoring":""}">${d.name}${d.mult>0?`<span class="mult">×${d.mult}</span>`:""}</span>`).join("");
+    const tr=document.createElement("tr");
+    tr.innerHTML=`<td><span class="rank ${rc}">${dr}</span></td><td><strong>${row.pname}</strong></td><td><div class="tags">${tags}</div></td><td style="text-align:right"><span class="${row.total>0?"score":"score score-zero"}">${row.total}</span></td>`;
+    tbody.appendChild(tr);
+  });
 }
 
-function renderLeaderboard(){
-const tbody=document.getElementById("lbTbody");
-if(!DATA.leaderboard.length){tbody.innerHTML=`<tr><td colspan="5" style="text-align:center;padding:40px;color:#4a6a4a;">No leaderboard data yet. Go to Admin tab to enter positions.</td></tr>`;return;}
-tbody.innerHTML="";
-const grouped={};
-DATA.leaderboard.forEach(e=>{if(!grouped[e.position])grouped[e.position]=[];grouped[e.position].push(e.name);});
-Object.keys(grouped).map(Number).sort((a,b)=>a-b).forEach(pos=>{
-grouped[pos].forEach(name=>{
-const mult=POS_MULT[pos]||0;const odds=ODDS[name]||"?";
-const score=mult&&odds!=="?"?(odds*mult):"—";
-const ss=score!=="—"?(score%1===0?score.toFixed(0):score.toFixed(1)):"—";
-const tr=document.createElement("tr");
-tr.innerHTML=`<td><span class="pos">${grouped[pos].length>1?"T":""}${pos}</span></td><td>${name}</td><td style="text-align:right">${odds}</td><td>${mult?`<span class="mbadge">×${mult}</span>`:`<span class="no-mult">Not scoring</span>`}</td><td style="text-align:right">${ss!=="—"?`<strong>${ss}</strong>`:"—"}</td>`;
-tbody.appendChild(tr);
-});
-});
+function renderLeaderboard(data){
+  const tbody=document.getElementById("lbTbody");
+  const leaderboard = data.leaderboard || [];
+  if(!leaderboard.length){
+    tbody.innerHTML=`<tr><td colspan="5" style="text-align:center;padding:40px;color:#4a6a4a;">No leaderboard data yet.</td></tr>`;
+    return;
+  }
+  tbody.innerHTML="";
+  const grouped={};
+  leaderboard.forEach(e=>{
+    if(!grouped[e.position]) grouped[e.position]=[];
+    grouped[e.position].push(e.name);
+  });
+  Object.keys(grouped).map(Number).sort((a,b)=>a-b).forEach(pos=>{
+    grouped[pos].forEach(name=>{
+      const mult=POS_MULT[pos]||0;
+      const odds=ODDS[name]||"?";
+      const score=mult&&odds!=="?"?(odds*mult):"—";
+      const tr=document.createElement("tr");
+      tr.innerHTML=`<td><span class="pos">${grouped[pos].length>1?"T":""}${pos}</span></td><td>${name}</td><td style="text-align:right">${odds}</td><td>${mult?`<span class="mbadge">×${mult}</span>`:`<span class="no-mult">Not scoring</span>`}</td><td style="text-align:right">${score}</td>`;
+      tbody.appendChild(tr);
+    });
+  });
 }
 
-function renderAdminLb(){
-const c=document.getElementById("lbInputRows");c.innerHTML="";
-const entries=DATA.leaderboard.length?DATA.leaderboard:Array(10).fill({name:"",position:""});
-entries.forEach(e=>addLbRow(e.name||"",e.position||""));
-}
-
-function renderAdminPicks(){
-const c=document.getElementById("picksRows");c.innerHTML="";
-DATA.participants.forEach(p=>{
-const div=document.createElement("div");div.className="pick-block";div.dataset.name=p.name;
-let html=`<strong>${p.name}</strong>`;
-for(let i=0;i<5;i++){
-const opts=GOLFER_NAMES.map(g=>`<option value="${g}" ${g===p.picks[i]?"selected":""}>${g}</option>`).join("");
-html+=`<select><option value="">— Pick ${i+1} —</option>${opts}</select>`;
-}
-div.innerHTML=html;c.appendChild(div);
-});
-}
-
-function renderAll(){renderStandings();renderLeaderboard();}
-
-function addLbRow(name="",pos=""){
-const div=document.createElement("div");div.className="field-row lb-entry";
-const opts=GOLFER_NAMES.map(g=>`<option value="${g}" ${g===name?"selected":""}>${g}</option>`).join("");
-div.innerHTML=`<label>Pos:</label><input type="number" class="pos-in" value="${pos}" placeholder="e.g. 2" min="1" max="50" style="max-width:68px;"><select class="name-in" style="flex:1;min-width:180px;"><option value="">— Select Golfer —</option>${opts}</select><button class="btn sm danger" onclick="this.parentElement.remove()">✕</button>`;
-document.getElementById("lbInputRows").appendChild(div);
+function renderAll(data){
+  renderStandings(data);
+  renderLeaderboard(data);
 }
 
 function showTab(id,btn){
-document.querySelectorAll(".tab-content").forEach(t=>t.classList.remove("active"));
-document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
-document.getElementById("tab-"+id).classList.add("active");btn.classList.add("active");
-if(id==="admin"&&document.getElementById("adminContent").style.display!=="none"){renderAdminLb();renderAdminPicks();}
+  document.querySelectorAll(".tab-content").forEach(t=>t.classList.remove("active"));
+  document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
+  document.getElementById("tab-"+id).classList.add("active");
+  btn.classList.add("active");
 }
 
-function unlockAdmin(){
-if(document.getElementById("adminPassInput").value===ADMIN_PASS){
-document.getElementById("adminLock").style.display="none";
-document.getElementById("adminContent").style.display="block";
-renderAdminLb();renderAdminPicks();
-}else{document.getElementById("lockMsg").textContent="❌ Wrong password";}
-}
-
-function setStatus(msg){document.getElementById("liveStatus").textContent=msg;}
-
-// Start — fetch latest data immediately
 fetchData();
-setInterval(fetchData,60000);
-
+setInterval(fetchData, 60000);
 </script>
 </body>
 </html>
+
+
+
+
